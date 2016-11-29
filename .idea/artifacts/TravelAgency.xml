@@ -1,0 +1,20 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="TravelAgency">
+    <output-path>$PROJECT_DIR$/out/artifacts/TravelAgency</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="TravelAgency" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: javax.faces:javax.faces-api:2.2" />
+          <element id="library" level="project" name="Maven: com.sun.faces:jsf-impl:2.2.0" />
+          <element id="library" level="project" name="Maven: jstl:jstl:1.2" />
+          <element id="library" level="project" name="Maven: org.primefaces:primefaces:5.3" />
+          <element id="library" level="project" name="Maven: org.primefaces.themes:all-themes:1.0.10" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="TravelAgency/web/Web" />
+    </root>
+  </artifact>
+</component>
