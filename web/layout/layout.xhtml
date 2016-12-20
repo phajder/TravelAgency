@@ -1,25 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html lang="#{localeBean.language}"
+      xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
-<h:head>
-    <p:layout fullPage="true">
-        <p:layoutUnit position="north">
-            <ui:include src="banner.xhtml"/>
-        </p:layoutUnit>
-        <p:layoutUnit position="west" resizable="false">
-            <ui:include src="menu.xhtml"/>
-        </p:layoutUnit>
-        <p:layoutUnit position="center">
-            <ui:insert name="content"/>
-        </p:layoutUnit>
-        <p:layoutUnit position="south">
-            <ui:include src="footer.xhtml"/>
-        </p:layoutUnit>
-    </p:layout>
-</h:head>
+<f:view locale="#{localeBean.locale}">
+    <h:head>
+        <p:layout fullPage="true">
+            <p:layoutUnit position="north">
+                <ui:include src="banner.xhtml"/>
+            </p:layoutUnit>
+            <p:layoutUnit position="west" resizable="false">
+                <ui:include src="menu.xhtml"/>
+            </p:layoutUnit>
+            <p:layoutUnit position="center">
+                <ui:insert name="content"/>
+            </p:layoutUnit>
+            <p:layoutUnit position="south">
+                <ui:include src="footer.xhtml"/>
+            </p:layoutUnit>
+        </p:layout>
+    </h:head>
+</f:view>
 </html>

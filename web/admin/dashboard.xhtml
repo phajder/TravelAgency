@@ -9,6 +9,10 @@
       template="/layout/layout.xhtml">
     <ui:define name="content">
         <p>Hi, it's admin restricted content.</p>
-        <p:commandButton id="logout-button" action="#{userBean.logout}" value="Logout"/>
+        <h:form id="set-locale">
+            <h:selectOneMenu value="#{localeBean.language}" onchange="submit()">
+                <f:selectItems value="#{localeBean.localesInMap}"/>
+            </h:selectOneMenu>
+        </h:form>
     </ui:define>
 </ui:composition>
