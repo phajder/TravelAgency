@@ -6,10 +6,10 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
-    <h:form>
+    <h:form id="main-menu-form">
         <p:growl autoUpdate="true"/>
 
-        <p:panelMenu style="width:300px">
+        <p:panelMenu id="main-menu" style="width:300px">
             <p:submenu label="Aktualności" expanded="true">
                 <p:submenu label="Kraków" actionListener="#" icon="ui-icon-notice" >
                     <p:menuitem value="Darmowa komunikacja miejska." url="http://krakow.pl/aktualnosci/205547,26,komunikat,25_listopada_darmowa_komunikacja_miejska.html" actionListener="#" ajax="false" icon="ui-icon-script" />
@@ -26,6 +26,14 @@
                 <p:menuitem value="Samolot" url="#" icon="ui-icon-seek-next" />
                 <p:menuitem value="Samochód" ulr="#" icon="ui-icon-seek-next" />
                 <p:menuitem value="Pieszo" url="#" icon="ui-icon-seek-next" />
+            </p:submenu>
+            <p:submenu id="admin" label="Administracja">
+                <p:menuitem id="login" value="#{forms['user.login']}" url="/admin-login.xhtml" rendered="#{!userBean.adminLogged}" />
+                <p:menuitem id="dashboard" value="#{forms['user.dashboard']}" url="/admin/dashboard.xhtml" />
+                <p:menuitem id="profile" value="#{forms['user.profile']}" url="/admin/profile.xhtml" />
+                <p:menuitem id="management" value="#{forms['admin.management']}" url="/admin/management.xhtml" />
+                <p:menuitem id="superadmin-content" value="#{forms['admin.superadmin_content']}" url="/admin/super-admin.xhtml" rendered="#{userBean.superAdmin}" />
+                <p:menuitem id="logout" value="#{forms['user.logout']}" action="#{userBean.logout}" rendered="#{userBean.adminLogged}" />
             </p:submenu>
         </p:panelMenu>
     </h:form>

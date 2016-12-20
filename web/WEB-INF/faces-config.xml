@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+    http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+    <application>
+        <locale-config>
+            <default-locale>pl</default-locale>
+        </locale-config>
+        <resource-bundle>
+            <base-name>com.hajder.travelagency.forms</base-name>
+            <var>forms</var>
+        </resource-bundle>
+    </application>
+    <navigation-rule>
+      <from-view-id>/admin-login.xhtml</from-view-id>
+      <navigation-case>
+          <to-view-id>/admin/dashboard.xhtml</to-view-id>
+          <from-outcome>success</from-outcome>
+          <redirect />
+      </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/*</from-view-id>
+        <navigation-case>
+            <from-action>#{userBean.logout}</from-action>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+</faces-config>

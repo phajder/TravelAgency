@@ -5,7 +5,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
- * Created by pioot on 27.04.2016.
+ * DataSource database connection management with authorization.
+ * Created by Piotrek on 27.04.2016.
+ * @author Piotr Hajder
  */
 public class DataSourceWithLoginDAOFactory extends DAOFactory {
     private DataSource dataSource;

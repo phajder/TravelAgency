@@ -9,7 +9,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
- * Created by pioot on 04.04.2016.
+ * Database Access Objects Factory.
+ * Created by Piotrek on 04.04.2016.
+ * @author Piotr Hajder
  */
 public abstract class DAOFactory {
     private static final String PROPERTY_URL = "url";

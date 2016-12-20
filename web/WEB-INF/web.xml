@@ -4,6 +4,7 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
     <display-name>Travel Agency</display-name>
+
     <servlet>
         <servlet-name>FacesServlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -13,8 +14,22 @@
         <servlet-name>FacesServlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
+
+    <error-page>
+        <location>/error-pages/403.xhtml</location>
+        <error-code>403</error-code>
+    </error-page>
+
     <context-param>
         <param-name>primefaces.THEME</param-name>
         <param-value>south-street</param-value>
     </context-param>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Application</web-resource-name>
+            <url-pattern>/layout/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint/>
+    </security-constraint>
 </web-app>

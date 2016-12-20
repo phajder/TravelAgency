@@ -4,6 +4,7 @@ import java.sql.*;
 
 /**
  * DAO utility class
+ * @author BalusC
  */
 public final class DAOUtil {
 

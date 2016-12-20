@@ -5,7 +5,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- * Created by pioot on 27.04.2016.
+ * Typical jdbc database access.
+ * Created by Piotrek on 27.04.2016.
+ * @author Piotr Hajder
  */
 public class DriverManagerDAOFactory extends DAOFactory {
     private String url;
