@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 /**
  * Database Access Objects Factory.
- * Created by Piotrek on 04.04.2016.
+ * Created by Piotr on 04.04.2016.
  * @author Piotr Hajder
  */
 public abstract class DAOFactory {

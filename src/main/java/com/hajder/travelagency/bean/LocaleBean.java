@@ -9,7 +9,8 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
- * Created by pioot on 20.12.2016.
+ * Created by Piotr on 20.12.2016.
+ * @author Piotr Hajder
  */
 @ManagedBean
 @SessionScoped

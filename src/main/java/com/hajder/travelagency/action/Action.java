@@ -5,7 +5,7 @@ import com.hajder.travelagency.exception.DAOException;
 
 /**
  * Database access actions
- * Created by Piotrek on 19.12.2016.
+ * Created by Piotr on 19.12.2016.
  * @author Piotr Hajder
  */
 public abstract class Action {
@@ -13,7 +13,7 @@ public abstract class Action {
 
     protected DAOFactory daoFactory;
 
-    protected Action() {
+    Action() {
         daoFactory = DAOFactory.getInstance(DB_PROVIDER);
     }
 

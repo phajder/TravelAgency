@@ -14,9 +14,9 @@ import static com.hajder.travelagency.filter.AdminFilter.SUPER_ADMIN_PATH;
 
 /**
  * Filtering /admin/* and /super-admin/* paths for unauthorized entries.
- * Created by Piotrek on 19.12.2016.
+ * Created by Piotr on 19.12.2016.
  * @see javax.servlet.Filter
- * @author Piotrek
+ * @author Piotr Hajder
  */
 @WebFilter(filterName = "AdminFilter", urlPatterns = { ADMIN_PATH + "/*", SUPER_ADMIN_PATH + "/*" })
 public class AdminFilter implements Filter {

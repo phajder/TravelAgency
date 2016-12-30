@@ -6,13 +6,13 @@ import java.sql.SQLException;
 
 /**
  * DataSource database connection management without authorization.
- * Created by Piotrek on 27.04.2016.
+ * Created by Piotr on 27.04.2016.
  * @author Piotr hajder
  */
-public class DataSourceDAOFactory extends DAOFactory {
+class DataSourceDAOFactory extends DAOFactory {
     private DataSource dataSource;
 
-    public DataSourceDAOFactory(DataSource dataSource) {
+    DataSourceDAOFactory(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 

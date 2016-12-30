@@ -1,7 +1,7 @@
 package com.hajder.travelagency.resource;
 
 /**
- * Created by Piotrek on 13.12.2016.
+ * Created by Piotr on 13.12.2016.
  * @author Piotr Hajder
  */
 public final class NavigationTags {

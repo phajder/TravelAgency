@@ -25,7 +25,7 @@ public final class DAOUtil {
      * @param values The parameter values to be set in the created PreparedStatement.
      * @throws SQLException If something fails during creating the PreparedStatement.
      */
-    public static PreparedStatement prepareStatement
+    static PreparedStatement prepareStatement
     (Connection connection, String sql, boolean returnGeneratedKeys, Object... values)
             throws SQLException
     {
@@ -41,7 +41,7 @@ public final class DAOUtil {
      * @param values The parameter values to be set in the created PreparedStatement.
      * @throws SQLException If something fails during setting the PreparedStatement values.
      */
-    public static void setValues(PreparedStatement statement, Object... values)
+    static void setValues(PreparedStatement statement, Object... values)
             throws SQLException
     {
         for (int i = 0; i < values.length; i++) {

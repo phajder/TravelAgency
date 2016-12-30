@@ -2,9 +2,9 @@ package com.hajder.travelagency.bean;
 
 import com.hajder.travelagency.action.GetUserAction;
 import com.hajder.travelagency.entity.User;
-import com.hajder.travelagency.model.UserRoles;
 import com.hajder.travelagency.resource.NavigationTags;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  * User managed bean used for user authorization, including admins and super-user
- * Created by Piotrek on 13.12.2016.
+ * Created by Piotr on 13.12.2016.
  * @author Piotr Hajder
  */
 @ManagedBean
@@ -22,31 +22,43 @@ public class UserBean {
     private String password;
 
     public String login() {
-        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-        //TODO: Zmienic sposob wybierania uzytkownika na pobieranego z bazy danych
-        User user = new User(username, password);
-        user.setRole(UserRoles.ADMIN);
-        session.setAttribute("user", user);
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
+                .getExternalContext().getSession(true);
         GetUserAction action = new GetUserAction();
+        action.setUsername(username);
+        action.setPassword(password);
         action.execute();
-        return NavigationTags.SUCCESS;
+
+        User user = action.getUser();
+        if(user != null) {
+            session.setAttribute("user", user);
+            password = null;
+            return NavigationTags.SUCCESS;
+        }
+        //TODO: Zmienic wiadomosc. Byc moze na lokalizowana.
+        FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage("Nieprawidlowa nazwa uzytkownika lub haslo"));
+        return NavigationTags.DENY;
     }
 
     public String logout() {
-        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
+                .getExternalContext().getSession(false);
         session.invalidate();
 
         return NavigationTags.SUCCESS;
     }
 
     public boolean isAdminLogged() {
-        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
+                .getExternalContext().getSession(true);
         User user = (User) session.getAttribute("user");
         return user != null && user.isAdmin();
     }
 
     public boolean isSuperAdmin() {
-        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
+                .getExternalContext().getSession(true);
         User user = (User) session.getAttribute("user");
         return user != null && user.isSuperAdmin();
     }

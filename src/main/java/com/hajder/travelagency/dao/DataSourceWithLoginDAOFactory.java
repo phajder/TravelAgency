@@ -6,15 +6,15 @@ import java.sql.SQLException;
 
 /**
  * DataSource database connection management with authorization.
- * Created by Piotrek on 27.04.2016.
+ * Created by Piotr on 27.04.2016.
  * @author Piotr Hajder
  */
-public class DataSourceWithLoginDAOFactory extends DAOFactory {
+class DataSourceWithLoginDAOFactory extends DAOFactory {
     private DataSource dataSource;
     private String username;
     private String password;
 
-    public DataSourceWithLoginDAOFactory(DataSource dataSource, String username, String password) {
+    DataSourceWithLoginDAOFactory(DataSource dataSource, String username, String password) {
         this.dataSource = dataSource;
         this.username = username;
         this.password = password;

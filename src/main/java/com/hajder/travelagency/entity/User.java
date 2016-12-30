@@ -1,15 +1,15 @@
 package com.hajder.travelagency.entity;
 
-import com.hajder.travelagency.model.UserRoles;
+import com.hajder.travelagency.model.UserRole;
 
 /**
- * Created by pioot on 19.12.2016.
+ * Created by Piotr on 19.12.2016.
+ * @author Piotr Hajder
  */
 public class User {
-    private long id;
     private String username;
     private String password;
-    private UserRoles role;
+    private UserRole role;
 
     public User() {
     }
@@ -17,10 +17,6 @@ public class User {
     public User(String username, String password) {
         this.username = username;
         this.password = password;
-    }
-
-    public long getId() {
-        return id;
     }
 
     public String getUsername() {
@@ -39,19 +35,15 @@ public class User {
         this.password = password;
     }
 
-    public UserRoles getRole() {
-        return role;
-    }
-
-    public void setRole(UserRoles role) {
+    public void setRole(UserRole role) {
         this.role = role;
     }
 
     public boolean isAdmin() {
-        return !role.equals(UserRoles.USER);
+        return !role.equals(UserRole.USER);
     }
 
     public boolean isSuperAdmin() {
-        return role.equals(UserRoles.SUPER_ADMIN);
+        return role.equals(UserRole.SUPER_ADMIN);
     }
 }
