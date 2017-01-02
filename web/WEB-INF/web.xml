@@ -25,6 +25,10 @@
         <param-value>south-street</param-value>
     </context-param>
 
+    <resource-ref>
+        <res-ref-name>images</res-ref-name>
+    </resource-ref>
+
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>Application</web-resource-name>
