@@ -9,18 +9,18 @@
       xmlns:p="http://primefaces.org/ui">
 <f:view locale="#{localeBean.locale}">
     <h:head/>
-    <h:body>
-        <p:layout fullPage="true">
-            <p:layoutUnit position="north">
+    <h:body id="body-container">
+        <p:layout id="layout-container" fullPage="true">
+            <p:layoutUnit id="layout-banner" position="north">
                 <ui:include src="banner.xhtml"/>
             </p:layoutUnit>
-            <p:layoutUnit position="west" resizable="false">
+            <p:layoutUnit id="layout-menu" position="west" resizable="false">
                 <ui:include src="menu.xhtml"/>
             </p:layoutUnit>
-            <p:layoutUnit position="center">
+            <p:layoutUnit id="layout-content" position="center">
                 <ui:insert name="content"/>
             </p:layoutUnit>
-            <p:layoutUnit position="south">
+            <p:layoutUnit id="layout-footer" position="south">
                 <ui:include src="footer.xhtml"/>
             </p:layoutUnit>
         </p:layout>
