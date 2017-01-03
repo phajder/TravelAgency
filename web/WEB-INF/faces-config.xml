@@ -11,6 +11,10 @@
             <base-name>com.hajder.travelagency.forms</base-name>
             <var>forms</var>
         </resource-bundle>
+        <resource-bundle>
+            <base-name>com.hajder.travelagency.menu</base-name>
+            <var>menu</var>
+        </resource-bundle>
     </application>
     <navigation-rule>
       <from-view-id>/admin-login.xhtml</from-view-id>

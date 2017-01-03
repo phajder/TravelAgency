@@ -9,31 +9,28 @@
     <h:form id="main-menu-form">
         <p:growl autoUpdate="true"/>
 
-        <p:panelMenu id="main-menu" style="width:300px">
-            <p:submenu label="Aktualności" expanded="true">
+        <p:panelMenu id="main-menu">
+            <p:submenu label="#{menu['main.dashboard']}" expanded="true">
                 <p:submenu label="Kraków" actionListener="#" icon="ui-icon-notice" >
                     <p:menuitem value="Darmowa komunikacja miejska." url="http://krakow.pl/aktualnosci/205547,26,komunikat,25_listopada_darmowa_komunikacja_miejska.html" actionListener="#" ajax="false" icon="ui-icon-script" />
                 </p:submenu>
             </p:submenu>
-            <p:submenu label="Ostatnio szukane">
-                <p:menuitem value="Brak" actionListener="#"  ajax="false" icon="ui-icon-close"/>
-            </p:submenu>
             <p:separator />
-            <p:submenu label="Wyznacz trase" >
+            <p:submenu label="#{menu['main.content']}" >
                 <p:menuitem value="Komunikacja Miejska" url="#" icon="ui-icon-seek-next" />
-                <p:menuitem value="Pociąg" url="#" icon="ui-icon-seek-next" />
+                <p:menuitem value="#{menu['main.trains']}" url="#" icon="ui-icon-seek-next" />
                 <p:menuitem value="Taxi" url="#" icon="ui-icon-seek-next" />
                 <p:menuitem value="Samolot" url="#" icon="ui-icon-seek-next" />
                 <p:menuitem value="Samochód" ulr="#" icon="ui-icon-seek-next" />
                 <p:menuitem value="Pieszo" url="#" icon="ui-icon-seek-next" />
             </p:submenu>
-            <p:submenu id="admin" label="Administracja">
-                <p:menuitem id="login" value="#{forms['user.login']}" url="/admin-login.xhtml" rendered="#{!userBean.adminLogged}" />
-                <p:menuitem id="dashboard" value="#{forms['user.dashboard']}" url="/admin/dashboard.xhtml" />
-                <p:menuitem id="profile" value="#{forms['user.profile']}" url="/admin/profile.xhtml" />
-                <p:menuitem id="management" value="#{forms['admin.management']}" url="/admin/management.xhtml" />
-                <p:menuitem id="superadmin-content" value="#{forms['admin.superadmin_content']}" url="/admin/super-admin.xhtml" rendered="#{userBean.superAdmin}" />
-                <p:menuitem id="logout" value="#{forms['user.logout']}" action="#{userBean.logout}" rendered="#{userBean.adminLogged}" />
+            <p:submenu id="menu-admin" label="#{menu['main.administration']}">
+                <p:menuitem id="menu-login" value="#{menu['menu.login']}" url="/admin-login.xhtml" rendered="#{!userBean.adminLogged}" />
+                <p:menuitem id="menu-dashboard" value="#{menu['menu.dashboard']}" url="/admin/dashboard.xhtml" />
+                <p:menuitem id="menu-profile" value="#{menu['menu.profile']}" url="/admin/profile.xhtml" />
+                <p:menuitem id="menu-management" value="#{menu['admin.management']}" url="/admin/management.xhtml" />
+                <p:menuitem id="menu-superadmin-content" value="#{menu['admin.superadmin_content']}" url="/admin/super-admin.xhtml" rendered="#{userBean.superAdmin}" />
+                <p:menuitem id="menu-logout" value="#{menu['menu.logout']}" action="#{userBean.logout}" rendered="#{userBean.adminLogged}" />
             </p:submenu>
         </p:panelMenu>
     </h:form>

@@ -9,9 +9,29 @@
       template="layout/layout.xhtml">
     <ui:define name="content">
         <h:form id="admin-login-form">
-            <p:inputText id="username" value="#{userBean.username}" required="true"/>
-            <p:password id="password" value="#{userBean.password}" label="Password" required="true"/>
-            <p:commandButton id="login" action="#{userBean.login}" value="Login"/>
+            <p:panelGrid id="login-panel">
+                <p:row>
+                    <p:column colspan="1">
+                        <p:outputLabel id="label-username" value="#{forms['login.username']}"/>
+                    </p:column>
+                    <p:column colspan="1">
+                        <p:inputText id="input-username" value="#{userBean.username}" required="true"/>
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column colspan="1">
+                        <p:outputLabel id="label-password" value="#{forms['login.password']}"/>
+                    </p:column>
+                    <p:column colspan="1">
+                        <p:password id="input-password" value="#{userBean.password}" required="true"/>
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column colspan="2">
+                        <p:commandButton id="button-login" action="#{userBean.login}" value="#{forms['login.button']}"/>
+                    </p:column>
+                </p:row>
+            </p:panelGrid>
         </h:form>
     </ui:define>
 </ui:composition>

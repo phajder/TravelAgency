@@ -44,7 +44,7 @@ public class AdminFilter implements Filter {
                 response.sendError(403);
             }
         } else {
-            response.sendRedirect(ADMIN_LOGIN);
+            response.sendRedirect(request.getContextPath() + ADMIN_LOGIN);
         }
     }
 

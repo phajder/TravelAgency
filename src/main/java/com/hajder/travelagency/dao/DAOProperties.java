@@ -15,7 +15,7 @@ import java.util.Properties;
  * @author BalusC
  * @link http://balusc.blogspot.com/2008/07/dao-tutorial-data-layer.html
  */
-public class DAOProperties {
+class DAOProperties {
 
     // Constants ----------------------------------------------------------------------------------
 
@@ -52,7 +52,7 @@ public class DAOProperties {
      * @throws DAOConfigurationException During class initialization if the DAO properties file is
      * missing in the classpath or cannot be loaded.
      */
-    public DAOProperties(String specificKey) throws DAOConfigurationException {
+    DAOProperties(String specificKey) throws DAOConfigurationException {
         this.specificKey = specificKey;
     }
 
@@ -67,7 +67,7 @@ public class DAOProperties {
      * @throws DAOConfigurationException If the returned property value is null or empty while
      * it is mandatory.
      */
-    public String getProperty(String key, boolean mandatory) throws DAOConfigurationException {
+    String getProperty(String key, boolean mandatory) throws DAOConfigurationException {
         String fullKey = specificKey + "." + key;
         String property = PROPERTIES.getProperty(fullKey);
 
