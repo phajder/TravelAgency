@@ -15,12 +15,18 @@ public class UserDAO extends DAO {
     private static final String SQL_VERIFY_USER =
             "SELECT user_role " +
             " FROM users " +
-            " WHERE username = ?" +
-            " AND password = ?";
+            " WHERE username = ? " +
+            " AND password = ? ";
     private static final String SQL_GET_SALT =
             "SELECT salt " +
             " FROM users " +
             " WHERE username = ?";
+    private static final String SQL_USER_UNIQUE = "SELECT COUNT(username) " +
+            " FROM users " +
+            " WHERE username = ?";
+    private static final String SQL_REGISTER =
+            "INSERT INTO users (username, password, salt, user_role, email) " +
+            " VALUES (?,?,?, " + UserRole.USER.toString() + "?,?)";
 
     public String getSalt(String username) throws SQLException {
         Connection conn = daoFactory.getConnection();
@@ -45,5 +51,28 @@ public class UserDAO extends DAO {
             user.setRole(role);
         }
         return user;
+    }
+
+    public boolean isUsernameUnique(String username) throws SQLException {
+        Connection conn = daoFactory.getConnection();
+        PreparedStatement stmt = conn.prepareStatement(SQL_USER_UNIQUE);
+        setValues(stmt, username);
+        ResultSet rs = stmt.executeQuery();
+        if(rs.next()) {
+            int val = rs.getInt(1);
+            return val == 0;
+        }
+        return false;
+    }
+
+    public void register(User user) throws SQLException {
+        Connection conn = daoFactory.getConnection();
+        PreparedStatement stmt = conn.prepareStatement(SQL_REGISTER);
+        setValues(stmt,
+                user.getUsername(),
+                user.getPassword(),
+                user.getSalt(),
+                user.getEmail());
+        stmt.execute();
     }
 }

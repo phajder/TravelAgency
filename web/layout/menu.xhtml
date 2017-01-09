@@ -4,7 +4,6 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <h:form id="main-menu-form">
         <p:growl autoUpdate="true"/>
@@ -23,6 +22,12 @@
                 <p:menuitem value="Samolot" url="#" icon="ui-icon-seek-next" />
                 <p:menuitem value="Samochód" ulr="#" icon="ui-icon-seek-next" />
                 <p:menuitem value="Pieszo" url="#" icon="ui-icon-seek-next" />
+            </p:submenu>
+            <p:submenu label="#{menu['main.user']}" >
+                <p:menuitem value="#{menu['menu.register']}" url="/register.xhtml" rendered="#{!userBean.userLogged}" />
+                <p:menuitem value="#{menu['menu.login']}" url="/user-login.xhtml" rendered="#{!userBean.userLogged}" />
+                <p:menuitem value="#{menu['menu.profile']}" url="/user/profile.xhtml" />
+                <p:menuitem value="#{menu['menu.logout']}" url="#{userBean.logout}" rendered="#{userBean.userLogged}" />
             </p:submenu>
             <p:submenu id="menu-admin" label="#{menu['main.administration']}">
                 <p:menuitem id="menu-login" value="#{menu['menu.login']}" url="/admin-login.xhtml" rendered="#{!userBean.adminLogged}" />

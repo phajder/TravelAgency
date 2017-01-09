@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      template="/layout/layout.xhtml">
+    <ui:define name="content">
+        <h:form>
+            <p:panelGrid>
+                <p:row>
+                    <p:column>
+                        <p:outputLabel value="#{forms['register.username']}" />
+                    </p:column>
+                    <p:column>
+                        <p:inputText value="#{userBean.username}" required="true">
+                            <f:validator validatorId="com.hajder.UsernameValidator" />
+                        </p:inputText>
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column>
+                        <p:outputLabel value="#{forms['register.password']}" />
+                    </p:column>
+                    <p:column>
+                        <p:password value="#{userBean.password}" required="true" />
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column>
+                        <p:outputLabel id="register-password" value="#{forms['register.confirmPassword']}" />
+                    </p:column>
+                    <p:column>
+                        <p:password match="register-password" value="#{userBean.password}" />
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column>
+                        <p:outputLabel value="#{forms['register.email']}" />
+                    </p:column>
+                    <p:column>
+                        <p:inputText value="#{userBean.email}" required="false">
+                            <f:validator validatorId="com.hajder.EmailValidator" />
+                        </p:inputText>
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column colspan="2">
+                        <p:commandButton value="#{forms['register.registration']}" action="#{userBean.register}" />
+                    </p:column>
+                </p:row>
+            </p:panelGrid>
+        </h:form>
+    </ui:define>
+</ui:composition>

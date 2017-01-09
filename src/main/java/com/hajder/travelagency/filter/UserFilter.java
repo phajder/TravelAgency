@@ -9,8 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-import static com.hajder.travelagency.filter.AdminFilter.ADMIN_PATH;
-import static com.hajder.travelagency.filter.AdminFilter.SUPER_ADMIN_PATH;
+import static com.hajder.travelagency.filter.UserFilter.ADMIN_PATH;
+import static com.hajder.travelagency.filter.UserFilter.SUPER_ADMIN_PATH;
+import static com.hajder.travelagency.filter.UserFilter.USER_PATH;
 
 /**
  * Filtering /admin/* and /super-admin/* paths for unauthorized entries.
@@ -18,10 +19,11 @@ import static com.hajder.travelagency.filter.AdminFilter.SUPER_ADMIN_PATH;
  * @see javax.servlet.Filter
  * @author Piotr Hajder
  */
-@WebFilter(filterName = "AdminFilter", urlPatterns = { ADMIN_PATH + "/*", SUPER_ADMIN_PATH + "/*" })
-public class AdminFilter implements Filter {
+@WebFilter(filterName = "UserFilter", urlPatterns = { ADMIN_PATH + "/*", SUPER_ADMIN_PATH + "/*", USER_PATH + "/*" })
+public class UserFilter implements Filter {
     static final String ADMIN_PATH = "/admin";
     static final String SUPER_ADMIN_PATH = "/super-admin";
+    static final String USER_PATH = "/user";
     private static final String ADMIN_LOGIN = "/admin-login.xhtml";
 
     @Override
@@ -38,7 +40,9 @@ public class AdminFilter implements Filter {
 
         if(user != null) {
             String ctx = request.getRequestURI();
-            if(ctx.startsWith(SUPER_ADMIN_PATH) ? user.isSuperAdmin() : user.isAdmin()) {
+            if(ctx.startsWith(USER_PATH) && !user.isAdmin()) {
+                filterChain.doFilter(request, response);
+            } else if(ctx.startsWith(SUPER_ADMIN_PATH) ? user.isSuperAdmin() : user.isAdmin()) {
                 filterChain.doFilter(request, response);
             } else {
                 response.sendError(403);

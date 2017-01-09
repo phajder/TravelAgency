@@ -1,6 +1,7 @@
 package com.hajder.travelagency.bean;
 
 import com.hajder.travelagency.action.GetUserAction;
+import com.hajder.travelagency.action.RegisterUserAction;
 import com.hajder.travelagency.entity.User;
 import com.hajder.travelagency.resource.NavigationTags;
 
@@ -20,6 +21,7 @@ import javax.servlet.http.HttpSession;
 public class UserBean {
     private String username;
     private String password;
+    private String email;
 
     public String login() {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
@@ -49,11 +51,31 @@ public class UserBean {
         return NavigationTags.SUCCESS;
     }
 
+    public String register() {
+        //TODO: Wykonac wiadomosc jako lokalizowana
+        RegisterUserAction action = new RegisterUserAction();
+        User user = new User(username, password);
+        user.setEmail(email);
+        action.setUser(user);
+        action.execute();
+
+        FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage("Wykonano poprawnie rejestracje. Musisz sie zalogowac."));
+        return NavigationTags.SUCCESS;
+    }
+
     public boolean isAdminLogged() {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
                 .getExternalContext().getSession(true);
         User user = (User) session.getAttribute("user");
         return user != null && user.isAdmin();
+    }
+
+    public boolean isUserLogged() {
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
+                .getExternalContext().getSession(true);
+        User user = (User) session.getAttribute("user");
+        return user != null && !user.isAdmin();
     }
 
     public boolean isSuperAdmin() {
@@ -77,5 +99,13 @@ public class UserBean {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
