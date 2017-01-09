@@ -25,15 +25,15 @@
                         <p:outputLabel value="#{forms['register.password']}" />
                     </p:column>
                     <p:column>
-                        <p:password value="#{userBean.password}" required="true" />
+                        <p:password match="register-password" value="#{userBean.password}" required="true"/>
                     </p:column>
                 </p:row>
                 <p:row>
                     <p:column>
-                        <p:outputLabel id="register-password" value="#{forms['register.confirmPassword']}" />
+                        <p:outputLabel value="#{forms['register.confirmPassword']}" />
                     </p:column>
                     <p:column>
-                        <p:password match="register-password" value="#{userBean.password}" />
+                        <p:password id="register-password" value="#{userBean.password}" required="true" />
                     </p:column>
                 </p:row>
                 <p:row>

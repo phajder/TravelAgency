@@ -26,7 +26,7 @@ public class UserDAO extends DAO {
             " WHERE username = ?";
     private static final String SQL_REGISTER =
             "INSERT INTO users (username, password, salt, user_role, email) " +
-            " VALUES (?,?,?, " + UserRole.USER.toString() + "?,?)";
+            " VALUES (?,?,?,?,?)";
 
     public String getSalt(String username) throws SQLException {
         Connection conn = daoFactory.getConnection();
@@ -65,14 +65,16 @@ public class UserDAO extends DAO {
         return false;
     }
 
-    public void register(User user) throws SQLException {
+    public boolean register(User user) throws SQLException {
         Connection conn = daoFactory.getConnection();
         PreparedStatement stmt = conn.prepareStatement(SQL_REGISTER);
         setValues(stmt,
                 user.getUsername(),
                 user.getPassword(),
                 user.getSalt(),
+                UserRole.USER.toString(),
                 user.getEmail());
-        stmt.execute();
+        int val = stmt.executeUpdate();
+        return val == 1;
     }
 }

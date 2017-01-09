@@ -25,6 +25,7 @@ public class UserFilter implements Filter {
     static final String SUPER_ADMIN_PATH = "/super-admin";
     static final String USER_PATH = "/user";
     private static final String ADMIN_LOGIN = "/admin-login.xhtml";
+    private static final String USER_LOGIN = "/user-login.xhtml";
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -37,9 +38,9 @@ public class UserFilter implements Filter {
         HttpSession session = request.getSession();
 
         User user = (session != null) ? (User) session.getAttribute("user") : null;
+        String ctx = request.getRequestURI();
 
         if(user != null) {
-            String ctx = request.getRequestURI();
             if(ctx.startsWith(USER_PATH) && !user.isAdmin()) {
                 filterChain.doFilter(request, response);
             } else if(ctx.startsWith(SUPER_ADMIN_PATH) ? user.isSuperAdmin() : user.isAdmin()) {
@@ -48,7 +49,8 @@ public class UserFilter implements Filter {
                 response.sendError(403);
             }
         } else {
-            response.sendRedirect(request.getContextPath() + ADMIN_LOGIN);
+            String path = ctx.startsWith(ADMIN_PATH) ? ADMIN_LOGIN : USER_LOGIN;
+            response.sendRedirect(request.getContextPath() + path);
         }
     }
 

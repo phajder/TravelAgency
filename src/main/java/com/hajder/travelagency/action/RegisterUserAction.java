@@ -1,6 +1,5 @@
 package com.hajder.travelagency.action;
 
-import com.hajder.travelagency.dao.DAOFactory;
 import com.hajder.travelagency.dao.UserDAO;
 import com.hajder.travelagency.entity.User;
 import com.hajder.travelagency.exception.DAOException;
@@ -9,7 +8,8 @@ import com.hajder.travelagency.model.SecurityUtil;
 import java.sql.SQLException;
 
 /**
- * Created by pioot on 09.01.2017.
+ * Created by Piotr on 09.01.2017.
+ * @author Piotr Hajder
  */
 public class RegisterUserAction extends Action {
     private User user;
