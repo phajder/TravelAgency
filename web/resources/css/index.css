@@ -1,0 +1,15 @@
+html, body, div, p, li, ul, ol, form, fieldset, h1, h2, h3, h4, h5, h6   { margin: 0; padding: 0; list-style: none; }
+
+p   { line-height: 20px; }
+
+h1        { font-family: Georgia, "New York CE", utopia, serif; margin-top: 10em; font-weight: normal;}
+h1 a      { text-decoration: none; color: #fff !important; }
+
+
+
+#logo { position: relative; overflow: hidden;}
+#logo *     { color: #C7F2EF; text-decoration: none !important;}
+#logo .block{ position: absolute; top: 0; left: 0; display: block; width: 100%; height: 100%; }
+
+
+
