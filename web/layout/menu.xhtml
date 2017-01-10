@@ -11,14 +11,17 @@
         <p:panelMenu id="main-menu">
             <p:submenu label="#{menu['main.dashboard']}" expanded="true">
                 <p:submenu label="Kraków" actionListener="#" icon="ui-icon-notice" >
-                    <p:menuitem value="Darmowa komunikacja miejska." url="http://krakow.pl/aktualnosci/205547,26,komunikat,25_listopada_darmowa_komunikacja_miejska.html" actionListener="#" ajax="false" icon="ui-icon-script" />
+                    <p:menuitem value="Darmowa komunikacja miejska."
+                                url="http://krakow.pl/aktualnosci/205547,26,komunikat,25_listopada_darmowa_komunikacja_miejska.html"
+                                actionListener="#"
+                                ajax="false" icon="ui-icon-script" />
                 </p:submenu>
             </p:submenu>
             <p:separator />
             <p:submenu label="#{menu['main.content']}" >
                 <p:menuitem value="#{menu['menu.publicTransport']}" url="#" icon="ui-icon-seek-next" />
                 <p:menuitem value="#{menu['menu.trains']}" url="#" icon="ui-icon-seek-next" />
-                <p:menuitem value="#{menu['menu.maps']}" url="#" icon="ui-icon-seek-next" />
+                <p:menuitem value="#{menu['menu.maps']}" url="/mapsContent.xhtml" icon="ui-icon-seek-next" />
             </p:submenu>
             <p:submenu label="#{menu['main.user']}" >
                 <p:menuitem value="#{menu['menu.register']}" url="/register.xhtml" rendered="#{!userBean.userLogged}" />
