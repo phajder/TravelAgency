@@ -16,12 +16,9 @@
             </p:submenu>
             <p:separator />
             <p:submenu label="#{menu['main.content']}" >
-                <p:menuitem value="Komunikacja Miejska" url="#" icon="ui-icon-seek-next" />
-                <p:menuitem value="#{menu['main.trains']}" url="#" icon="ui-icon-seek-next" />
-                <p:menuitem value="Taxi" url="#" icon="ui-icon-seek-next" />
-                <p:menuitem value="Samolot" url="#" icon="ui-icon-seek-next" />
-                <p:menuitem value="Samochód" ulr="#" icon="ui-icon-seek-next" />
-                <p:menuitem value="Pieszo" url="#" icon="ui-icon-seek-next" />
+                <p:menuitem value="#{menu['menu.publicTransport']}" url="#" icon="ui-icon-seek-next" />
+                <p:menuitem value="#{menu['menu.trains']}" url="#" icon="ui-icon-seek-next" />
+                <p:menuitem value="#{menu['menu.maps']}" url="#" icon="ui-icon-seek-next" />
             </p:submenu>
             <p:submenu label="#{menu['main.user']}" >
                 <p:menuitem value="#{menu['menu.register']}" url="/register.xhtml" rendered="#{!userBean.userLogged}" />
