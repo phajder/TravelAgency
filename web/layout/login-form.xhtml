@@ -8,30 +8,18 @@
       xmlns:p="http://primefaces.org/ui"
       template="layout.xhtml">
     <ui:define name="content">
-        <h:form id="admin-login-form">
-            <p:panelGrid id="login-panel">
-                <p:row>
-                    <p:column colspan="1">
+        <h:form id="admin-login-form" style="background: rgba(19, 35, 47, 0.9);  padding: 40px;  max-width: 600px;  margin: 40px auto;  border-radius: 4px; box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);">
+            <p:tabView style="display: block;  background: lavender; width: inherit">
+            <p:tab title="#{menu['menu.login']}" titleStyle="width: 100%;">
+            <h:panelGrid columns="2" cellpadding="10">
                         <p:outputLabel id="label-username" value="#{forms['login.username']}"/>
-                    </p:column>
-                    <p:column colspan="1">
                         <p:inputText id="input-username" value="#{userBean.username}" required="true"/>
-                    </p:column>
-                </p:row>
-                <p:row>
-                    <p:column colspan="1">
                         <p:outputLabel id="label-password" value="#{forms['login.password']}"/>
-                    </p:column>
-                    <p:column colspan="1">
                         <p:password id="input-password" value="#{userBean.password}" required="true"/>
-                    </p:column>
-                </p:row>
-                <p:row>
-                    <p:column colspan="2">
                         <ui:insert name="login-button"/>
-                    </p:column>
-                </p:row>
-            </p:panelGrid>
+            </h:panelGrid>
+            </p:tab>
+            </p:tabView>
         </h:form>
     </ui:define>
 </ui:composition>
