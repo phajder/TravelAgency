@@ -14,21 +14,21 @@
             <p:panel header="#{forms['public_transport.header']}">
                 <h:panelGrid columns="2">
                     <p:outputLabel value="#{forms['public_transport.location']}" />
-                    <p:selectOneMenu id="location" value="#{publicTransport.location}">
+                    <p:selectOneMenu id="location" value="#{publicTransport.location}" required="true">
                         <f:selectItem itemLabel="#{forms['public_transport.select']}" itemValue="" noSelectionOption="true" />
                         <f:selectItems value="#{publicTransport.cities}" />
                     </p:selectOneMenu>
 
                     <p:outputLabel value="#{forms['public_transport.start']}" />
-                    <p:inputText value="#{publicTransport.startPoint}" />
+                    <p:inputText value="#{publicTransport.startPoint}" required="true" />
 
                     <p:outputLabel value="#{forms['public_transport.end']}" />
-                    <p:inputText value="#{publicTransport.endPoint}" />
+                    <p:inputText value="#{publicTransport.endPoint}" required="true" />
 
                     <p:outputLabel value="#{forms['public_transport.date']}" for="calendar-button" />
                     <p:calendar id="calendar-button" value="#{publicTransport.date}" showOn="button" />
 
-                    <p:outputLabel value="#{forms['public_transpor.hour']}" />
+                    <p:outputLabel value="#{forms['public_transport.hour']}" />
                     <p:inputText value="#{publicTransport.hour}" />
 
                     <p:outputLabel value="#{forms['public_transport.mode']}" />
@@ -43,7 +43,7 @@
                 </h:panelGrid>
                 <p:separator />
                 <h:panelGrid columns="2">
-                    <p:commandButton action="#{publicTransport.findConnection}" value="#{forms['submit']}" />
+                    <p:commandButton action="#{publicTransport.findConnection}" value="#{forms['find']}" />
                     <p:commandButton update="msg" action="#{publicTransport.addFavourite}" value="#{forms['public_transport.favourite']}" />
                 </h:panelGrid>
             </p:panel>

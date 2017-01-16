@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      template="/layout/layout.xhtml">
+    <ui:define name="content">
+        <p:dataList value="#{favouriteTransport.favouritePublicTransports}" var="fav" type="unordered" itemType="none" paginator="true" rows="5">
+            <f:facet name="header">
+                #{forms['user.favourite']}
+            </f:facet>
+            <h:panelGrid columns="2">
+                <p:outputLabel value="#{forms['public_transport.start']}" />
+                <h:outputText value="#{fav.startPoint}" />
+
+                <p:outputLabel value="#{forms['public_transport.end']}" />
+                <h:outputText value="#{fav.endPoint}" />
+
+                <p:outputLabel value="#{forms['public_transport.hour']}" />
+                <h:outputText value="#{fav.hour}" />
+
+                <p:outputLabel value="#{forms['public_transport.transfer']}" />
+                <h:outputText value="#{fav.avoidTransfer}" />
+
+                <p:outputLabel value="#{forms['public_transport.mode']}" />
+                <h:outputText value="#{fav.mode}" />
+            </h:panelGrid>
+            <p:commandButton value="#{forms['modify']}" action="#" />
+            <p:commandButton value="#{forms['delete']}" action="#"/>
+            <p:commandButton value="#{forms['find']}" action="#" />
+        </p:dataList>
+    </ui:define>
+</ui:composition>

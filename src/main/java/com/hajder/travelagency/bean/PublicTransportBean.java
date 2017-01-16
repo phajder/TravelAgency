@@ -28,7 +28,7 @@ public class PublicTransportBean {
 
     private String location, startPoint, endPoint, hour;
     private Date date;
-    private boolean avoidTransfer, mode;
+    private Boolean avoidTransfer, mode;
 
     @PostConstruct
     public void init() {
