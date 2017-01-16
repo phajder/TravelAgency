@@ -14,7 +14,7 @@ import static com.hajder.travelagency.dao.DAOUtil.setValues;
  */
 public class FavouriteDAO extends DAO {
     private static final String SQL_ADD_FAVOURITE_TRANSPORT =
-            "INSERT INTO favourite_transport (user_id, start_point, end_point, hour, avoid, point_mode) " +
+            "INSERT INTO favourite_transport (user_id, start_point, end_point, fav_time, avoid, point_mode) " +
             " VALUES (?,?,?,?,?,?)";
 
     public boolean saveFavourite(FavouritePublicTransport fpt, long userId){
