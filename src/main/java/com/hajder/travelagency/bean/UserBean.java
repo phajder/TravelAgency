@@ -4,12 +4,15 @@ import com.hajder.travelagency.action.GetUserAction;
 import com.hajder.travelagency.action.RegisterUserAction;
 import com.hajder.travelagency.entity.User;
 import com.hajder.travelagency.resource.NavigationTags;
+import org.apache.http.client.utils.URIBuilder;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 /**
  * User managed bean used for user authorization, including admins and super-user
@@ -49,6 +52,23 @@ public class UserBean {
         session.invalidate();
 
         return NavigationTags.SUCCESS;
+    }
+
+    public String dupa() {
+        try {
+            URI uri = new URIBuilder()
+                    .setScheme("http")
+                    .setHost("jakdojade.pl")
+                    .setPath("/")
+                    .setParameter("fc", "52.23232:21.01599")
+                    .setParameter("tc", "52.26289:20.98983")
+                    .setParameter("cid", "3000")
+                    .build();
+            return uri.toString();
+        } catch (URISyntaxException e) {
+
+        }
+        return null;
     }
 
     public String register() {

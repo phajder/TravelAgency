@@ -4,6 +4,7 @@ import com.hajder.travelagency.action.ApiLocationAction;
 import com.hajder.travelagency.action.FavouriteTransportAction;
 import com.hajder.travelagency.entity.FavouritePublicTransport;
 import com.hajder.travelagency.entity.User;
+import org.apache.http.client.utils.URIBuilder;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -11,6 +12,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -39,8 +42,26 @@ public class PublicTransportBean {
     }
 
     public String findConnection() {
-        //TODO: implementacja HTTP GET API jakdojade.pl
-        return "";
+        try {
+            URI uri = new URIBuilder()
+                    .setScheme("http")
+                    .setHost("jakdojade.pl")
+                    .setPath("/")
+                    //.setParameter("fc", "52.23232:21.01599")
+                    //.setParameter("tc", "52.26289:20.98983")
+                    .setParameter("fn", startPoint)
+                    .setParameter("tn", endPoint)
+                    .setParameter("cid", locations.get(location))
+                    .setParameter("d", date.toString())
+                    .setParameter("h", hour)
+                    .setParameter("aac", Boolean.toString(avoidTransfer))
+                    .setParameter("ia", Boolean.toString(mode))
+                    .build();
+            return uri.toString();
+        } catch (URISyntaxException e) {
+            //TODO: tomcat logging exception
+        }
+        return null;
     }
 
     public void addFavourite() {
