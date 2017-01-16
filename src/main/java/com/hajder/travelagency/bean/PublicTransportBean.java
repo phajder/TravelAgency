@@ -20,9 +20,9 @@ public class PublicTransportBean {
     private Map<String, String> locations;
     private List<String> cities;
 
-    private String location;
-    private String startPoint, endPoint;
+    private String location, startPoint, endPoint, hour;
     private Date date;
+    private boolean avoidTransfer, mode;
 
     @PostConstruct
     public void init() {
@@ -43,6 +43,30 @@ public class PublicTransportBean {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public String getHour() {
+        return hour;
+    }
+
+    public void setHour(String hour) {
+        this.hour = hour;
+    }
+
+    public boolean isAvoidTransfer() {
+        return avoidTransfer;
+    }
+
+    public void setAvoidTransfer(boolean avoidTransfer) {
+        this.avoidTransfer = avoidTransfer;
+    }
+
+    public boolean isMode() {
+        return mode;
+    }
+
+    public void setMode(boolean mode) {
+        this.mode = mode;
     }
 
     public List<String> getCities() {
@@ -71,9 +95,5 @@ public class PublicTransportBean {
 
     public void setEndPoint(String endPoint) {
         this.endPoint = endPoint;
-    }
-
-    public Map<String, String> getLocations() {
-        return locations;
     }
 }

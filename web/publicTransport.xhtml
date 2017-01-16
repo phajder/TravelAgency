@@ -25,7 +25,19 @@
 
                     <p:outputLabel value="#{forms['public_transport.date']}" for="calendar-button" />
                     <p:calendar id="calendar-button" value="#{publicTransport.date}" showOn="button" />
-                    <!-- TODO: dodatkowe pola do API jakdojade.pl -->
+
+                    <p:outputLabel value="#{forms['public_transpor.hour']}" />
+                    <p:inputText value="#{publicTransport.hour}" />
+
+                    <p:outputLabel value="#{forms['public_transport.mode']}" />
+                    <p:selectBooleanButton value="#{publicTransport.mode}"
+                                           onLabel="#{forms['public_transport.mode.on']}"
+                                           offLabel="#{forms['public_transport.mode.off']}" />
+
+                    <p:outputLabel value="#{forms['public_transport.transfer']}" />
+                    <p:selectBooleanButton value="#{publicTransport.avoidTransfer}"
+                                           onLabel="#{forms['submit.yes']}"
+                                           offLabel="#{forms['submit.no']}" />
                 </h:panelGrid>
                 <p:separator />
                 <p:commandButton action="#{publicTransport.findConnection}" value="#{forms['submit']}" />

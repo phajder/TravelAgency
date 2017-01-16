@@ -18,22 +18,43 @@ public class ApiLocationsDAO extends DAO {
             "SELECT location, cid " +
             " FROM api_locations";
 
-    public boolean addLocation(String location, String cid) throws SQLException {
-        Connection conn = daoFactory.getConnection();
-        PreparedStatement stmt = conn.prepareStatement(SQL_ADD_LOCATION);
-        setValues(stmt, location, cid);
-        int val = stmt.executeUpdate();
-        return val == 1;
+    public boolean addLocation(String location, String cid) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        try {
+            conn = daoFactory.getConnection();
+            stmt = conn.prepareStatement(SQL_ADD_LOCATION);
+            setValues(stmt, location, cid);
+            int val = stmt.executeUpdate();
+            return val == 1;
+        } catch (SQLException e) {
+            //TODO: tomcat logging exception
+        } finally {
+            try { if(conn != null) conn.close(); } catch (SQLException ignored){}
+            try { if(stmt != null) stmt.close(); } catch (SQLException ignored){}
+        }
+        return false;
     }
 
-    public Map<String, String> getLocations()  throws SQLException {
+    public Map<String, String> getLocations() {
         Map<String, String> result = new HashMap<>();
-        Connection conn = daoFactory.getConnection();
-        Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery(SQL_GET_LOCATIONS);
-        while(rs.next()) {
-            result.put(rs.getString(1),//location
-                    rs.getString(2));//cid
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+        try {
+            conn = daoFactory.getConnection();
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(SQL_GET_LOCATIONS);
+            while (rs.next()) {
+                result.put(rs.getString(1),//location
+                        rs.getString(2));//cid
+            }
+        } catch (SQLException e) {
+            //TODO: tomcat logging exception
+        } finally {
+            try { if(conn != null) conn.close(); } catch (SQLException ignored){}
+            try { if(stmt != null) stmt.close(); } catch (SQLException ignored){}
+            try { if(rs != null) rs.close(); } catch (SQLException ignored){}
         }
         return result;
     }

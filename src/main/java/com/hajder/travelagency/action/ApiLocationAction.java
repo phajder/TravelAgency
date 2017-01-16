@@ -18,15 +18,10 @@ public class ApiLocationAction extends Action {
     @Override
     protected void doAction() throws DAOException {
         ApiLocationsDAO dao = (ApiLocationsDAO) daoFactory.getDaoInstance(ApiLocationsDAO.class);
-        try {
-            if(location != null && cid != null) {
-                dao.addLocation(location, cid);
-            } else {
-                locations = dao.getLocations();
-            }
-        } catch (SQLException e) {
-            System.out.println("dupadupa");
-            //TODO: tomcat logging system
+        if(location != null && cid != null) {
+            dao.addLocation(location, cid);
+        } else {
+            locations = dao.getLocations();
         }
     }
 

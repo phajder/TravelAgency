@@ -21,13 +21,9 @@ public class GetUserAction extends Action {
     @Override
     protected void doAction() throws DAOException {
         UserDAO dao = (UserDAO) daoFactory.getDaoInstance(UserDAO.class);
-        try {
-            String salt = dao.getSalt(username);
-            password = SecurityUtil.generateHashedString(password, salt);
-            user = dao.getUser(username, password);
-        } catch (SQLException e) {
-            //TODO: add tomcat logging system
-        }
+        String salt = dao.getSalt(username);
+        password = SecurityUtil.generateHashedString(password, salt);
+        user = dao.getUser(username, password);
     }
 
     public User getUser() {

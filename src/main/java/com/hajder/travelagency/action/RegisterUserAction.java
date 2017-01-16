@@ -22,11 +22,7 @@ public class RegisterUserAction extends Action {
         user.setSalt(salt);
 
         UserDAO dao = (UserDAO) daoFactory.getDaoInstance(UserDAO.class);
-        try {
-            dao.register(user);
-        } catch (SQLException e) {
-            //TODO: tomcat logging system
-        }
+        dao.register(user);
     }
 
     public boolean isUsernameUnique(String username) throws SQLException {
