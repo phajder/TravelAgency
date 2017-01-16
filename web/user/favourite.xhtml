@@ -8,29 +8,78 @@
       xmlns:p="http://primefaces.org/ui"
       template="/layout/layout.xhtml">
     <ui:define name="content">
-        <p:dataList value="#{favouriteTransport.favouritePublicTransports}" var="fav" type="unordered" itemType="none" paginator="true" rows="5">
-            <f:facet name="header">
-                #{forms['user.favourite']}
-            </f:facet>
-            <h:panelGrid columns="2">
-                <p:outputLabel value="#{forms['public_transport.start']}" />
-                <h:outputText value="#{fav.startPoint}" />
+        <p:growl autoUpdate="true" />
+        <h:form id="fav-form">
+            <p:dataTable id="favDT" var="fav"
+                         value="#{favouriteTransport.favouritePublicTransports}"
+                         selection="#{favouriteTransport.favouriteSelected}"
+                         rowKey="#{fav.favouriteId}"
+                         paginator="true" rows="5">
+                <f:facet name="header">
+                    #{forms['user.favourite']}
+                </f:facet>
 
-                <p:outputLabel value="#{forms['public_transport.end']}" />
-                <h:outputText value="#{fav.endPoint}" />
+                <p:column selectionMode="single" />
 
-                <p:outputLabel value="#{forms['public_transport.hour']}" />
-                <h:outputText value="#{fav.hour}" />
+                <p:column headerText="#{forms['public_transport.start']}">
+                    <h:outputText value="#{fav.startPoint}" />
+                </p:column>
 
-                <p:outputLabel value="#{forms['public_transport.transfer']}" />
-                <h:outputText value="#{fav.avoidTransfer}" />
+                <p:column headerText="#{forms['public_transport.end']}">
+                    <h:outputText value="#{fav.endPoint}" />
+                </p:column>
 
-                <p:outputLabel value="#{forms['public_transport.mode']}" />
-                <h:outputText value="#{fav.mode}" />
-            </h:panelGrid>
-            <p:commandButton value="#{forms['modify']}" action="#" />
-            <p:commandButton value="#{forms['delete']}" action="#"/>
-            <p:commandButton value="#{forms['find']}" action="#" />
-        </p:dataList>
+                <p:column headerText="#{forms['public_transport.hour']}">
+                    <h:outputText value="#{fav.hour}" />
+                </p:column>
+
+                <p:column headerText="#{forms['public_transport.transfer']}">
+                    <h:outputText value="#{fav.avoidTransfer}" />
+                </p:column>
+
+                <p:column headerText="#{forms['public_transport.mode']}">
+                    <h:outputText value="#{fav.mode}" />
+                </p:column>
+
+                <f:facet name="footer">
+                    <p:commandButton process="favDT" value="#{forms['modify']}"
+                                     update=":fav-form:favDetails" oncomplete="PF('favDialog').show()" />
+                    <p:commandButton process="favDT" value="#{forms['delete']}" action="#"/>
+                    <p:commandButton value="#{forms['find']}" action="#" />
+                </f:facet>
+            </p:dataTable>
+            <p:dialog header="Info" widgetVar="favDialog" appendTo="@(body)" modal="true"
+                      showEffect="fade" hideEffect="fade" resizable="false">
+                <p:outputPanel id="favDetails" style="text-align: center;">
+                    <f:facet name="header">
+                        #{forms['public_transport.connection']}
+                    </f:facet>
+                    <p:panelGrid columns="2" rendered="#{not empty favouriteTransport.favouriteSelected}">
+                        <h:outputLabel value="#{forms['public_transport.start']}" />
+                        <h:inputText value="#{favouriteTransport.favouriteSelected.startPoint}" />
+
+                        <h:outputLabel value="#{forms['public_transport.end']}" />
+                        <h:inputText value="#{favouriteTransport.favouriteSelected.endPoint}" />
+
+                        <h:outputLabel value="#{forms['public_transport.hour']}" />
+                        <h:inputText value="#{favouriteTransport.favouriteSelected.hour}" />
+
+                        <h:outputLabel value="#{forms['public_transport.transfer']}" />
+                        <p:selectBooleanButton value="#{favouriteTransport.favouriteSelected.avoidTransfer}"
+                                               onLabel="#{forms['submit.yes']}"
+                                               offLabel="#{forms['submit.no']}" />
+
+                        <h:outputLabel value="#{forms['public_transport.mode']}" />
+                        <p:selectBooleanButton value="#{favouriteTransport.favouriteSelected.mode}"
+                                               onLabel="#{forms['public_transport.mode.on']}"
+                                               offLabel="#{forms['public_transport.mode.off']}" />
+                    </p:panelGrid>
+                    <p:separator />
+                    <p:commandButton value="#{forms['submit']}"
+                                     action="#{favouriteTransport.update}"
+                                     oncomplete="PF('favDialog').hide();"/>
+                </p:outputPanel>
+            </p:dialog>
+        </h:form>
     </ui:define>
 </ui:composition>

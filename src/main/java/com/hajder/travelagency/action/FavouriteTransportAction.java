@@ -27,7 +27,7 @@ public class FavouriteTransportAction extends Action {
             if(fpt != null) {
                 dao.saveFavourite(fpt, userId);
             } else {
-                dao.getFavouriteTransports(userId);
+                favouriteTransports = dao.getFavouriteTransports(userId);
             }
         }
     }

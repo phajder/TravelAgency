@@ -5,6 +5,7 @@ package com.hajder.travelagency.entity;
  * @author Piotr Hajder
  */
 public class FavouritePublicTransport {
+    private long favouriteId;
     private String startPoint, endPoint, hour;
     private boolean avoidTransfer, mode;
 
@@ -50,5 +51,13 @@ public class FavouritePublicTransport {
 
     public void setMode(boolean mode) {
         this.mode = mode;
+    }
+
+    public long getFavouriteId() {
+        return favouriteId;
+    }
+
+    public void setFavouriteId(long favouriteId) {
+        this.favouriteId = favouriteId;
     }
 }

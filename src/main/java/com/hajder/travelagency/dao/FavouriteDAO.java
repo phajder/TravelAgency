@@ -20,7 +20,7 @@ public class FavouriteDAO extends DAO {
             "INSERT INTO favourite_transport (user_id, start_point, end_point, fav_time, avoid, point_mode) " +
             " VALUES (?,?,?,?,?,?)";
     private static final String SQL_GET_FAVOURITES =
-            "SELECT start_point, end_point, fav_time, avoid, point_mode " +
+            "SELECT favourite_id, start_point, end_point, fav_time, avoid, point_mode " +
             " FROM favourite_transport " +
             " WHERE user_id = ?";
 
@@ -56,14 +56,16 @@ public class FavouriteDAO extends DAO {
             stmt = conn.prepareStatement(SQL_GET_FAVOURITES);
             setValues(stmt, userId);
             rs = stmt.executeQuery();
-
+            int counter;
             while(rs.next()) {
+                counter = 1;
                 FavouritePublicTransport obj = new FavouritePublicTransport();
-                obj.setStartPoint(rs.getString(1));
-                obj.setEndPoint(rs.getString(2));
-                obj.setHour(rs.getString(3));
-                obj.setAvoidTransfer(rs.getBoolean(4));
-                obj.setMode(rs.getBoolean(5));
+                obj.setFavouriteId(rs.getLong(counter++));
+                obj.setStartPoint(rs.getString(counter++));
+                obj.setEndPoint(rs.getString(counter++));
+                obj.setHour(rs.getString(counter++));
+                obj.setAvoidTransfer(rs.getBoolean(counter++));
+                obj.setMode(rs.getBoolean(counter++));
                 result.add(obj);
             }
         } catch (SQLException e) {

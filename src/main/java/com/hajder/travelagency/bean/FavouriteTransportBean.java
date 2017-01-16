@@ -6,7 +6,7 @@ import com.hajder.travelagency.entity.User;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -16,9 +16,11 @@ import java.util.List;
  * @author Piotr Hajder
  */
 @ManagedBean(name = "favouriteTransport")
-@RequestScoped
+@ViewScoped
 public class FavouriteTransportBean {
     private List<FavouritePublicTransport> favouritePublicTransports;
+
+    private FavouritePublicTransport favouriteSelected;
 
     @PostConstruct
     public void init() {
@@ -34,7 +36,20 @@ public class FavouriteTransportBean {
         }
     }
 
+    public void update() {
+        System.out.println("Testing...");
+        //TODO: implement update event
+    }
+
     public List<FavouritePublicTransport> getFavouritePublicTransports() {
         return favouritePublicTransports;
+    }
+
+    public FavouritePublicTransport getFavouriteSelected() {
+        return favouriteSelected;
+    }
+
+    public void setFavouriteSelected(FavouritePublicTransport favouriteSelected) {
+        this.favouriteSelected = favouriteSelected;
     }
 }
