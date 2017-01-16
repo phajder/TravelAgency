@@ -23,6 +23,8 @@
                     <p:outputLabel value="#{forms['public_transport.end']}" />
                     <p:inputText value="#{publicTransport.endPoint}" />
 
+                    <p:outputLabel value="#{forms['public_transport.date']}" for="calendar-button" />
+                    <p:calendar id="calendar-button" value="#{publicTransport.date}" showOn="button" />
                     <!-- TODO: dodatkowe pola do API jakdojade.pl -->
                 </h:panelGrid>
                 <p:separator />

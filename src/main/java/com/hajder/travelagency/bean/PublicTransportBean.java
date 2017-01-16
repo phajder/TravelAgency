@@ -6,6 +6,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +22,7 @@ public class PublicTransportBean {
 
     private String location;
     private String startPoint, endPoint;
+    private Date date;
 
     @PostConstruct
     public void init() {
@@ -33,6 +35,14 @@ public class PublicTransportBean {
     public String findConnection() {
         //TODO: implementacja HTTP GET API jakdojade.pl
         return "";
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public List<String> getCities() {
