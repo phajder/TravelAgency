@@ -25,6 +25,7 @@ public class ApiLocationAction extends Action {
                 locations = dao.getLocations();
             }
         } catch (SQLException e) {
+            System.out.println("dupadupa");
             //TODO: tomcat logging system
         }
     }

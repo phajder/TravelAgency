@@ -5,6 +5,8 @@ import com.hajder.travelagency.action.ApiLocationAction;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -15,6 +17,7 @@ import java.util.Map;
 @RequestScoped
 public class PublicTransportBean {
     private Map<String, String> locations;
+    private List<String> cities;
 
     private String location;
     private String startPoint, endPoint;
@@ -24,11 +27,16 @@ public class PublicTransportBean {
         ApiLocationAction action = new ApiLocationAction();
         action.execute();
         locations = action.getLocations();
+        cities = new ArrayList<>(locations.keySet());
     }
 
     public String findConnection() {
         //TODO: implementacja HTTP GET API jakdojade.pl
         return "";
+    }
+
+    public List<String> getCities() {
+        return cities;
     }
 
     public String getLocation() {

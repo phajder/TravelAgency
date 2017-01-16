@@ -9,22 +9,25 @@
       template="/layout/layout.xhtml">
     <ui:define name="content">
         <h:form id="find-connection-form">
-            <h:panelGrid columns="2">
-                <p:outputLabel value="#{forms['public_transport.location']}" />
-                <p:selectOneListbox id="location" value="#{publicTransport.location}">
-                    <f:selectItem itemLabel="#{forms['public_transport.select']}" itemValue="" noSelectionOption="true" />
-                    <f:selectItems value="#{publicTransport.locations.keySet}" />
-                </p:selectOneListbox>
+            <p:panel header="#{forms['public_transport.header']}">
+                <h:panelGrid columns="2">
+                    <p:outputLabel value="#{forms['public_transport.location']}" />
+                    <p:selectOneMenu id="location" value="#{publicTransport.location}">
+                        <f:selectItem itemLabel="#{forms['public_transport.select']}" itemValue="" noSelectionOption="true" />
+                        <f:selectItems value="#{publicTransport.cities}" />
+                    </p:selectOneMenu>
 
-                <p:outputLabel value="#{forms['public_transport.start']}" />
-                <p:inputText value="#{publicTransport.startPoint}" />
+                    <p:outputLabel value="#{forms['public_transport.start']}" />
+                    <p:inputText value="#{publicTransport.startPoint}" />
 
-                <p:outputLabel value="#{forms['public_transport.end']}" />
-                <p:inputText value="#{publicTransport.endPoint}" />
+                    <p:outputLabel value="#{forms['public_transport.end']}" />
+                    <p:inputText value="#{publicTransport.endPoint}" />
 
-                <!-- TODO: dodatkowe pola do API jakdojade.pl -->
-            </h:panelGrid>
-            <p:commandButton action="#{publicTransport.findConnection}" value="#{forms['submit']}" />
+                    <!-- TODO: dodatkowe pola do API jakdojade.pl -->
+                </h:panelGrid>
+                <p:separator />
+                <p:commandButton action="#{publicTransport.findConnection}" value="#{forms['submit']}" />
+            </p:panel>
         </h:form>
     </ui:define>
 </ui:composition>
