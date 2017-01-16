@@ -10,7 +10,7 @@
       template="/layout/layout.xhtml">
     <ui:define name="content">
         <p:tabView orientation="top">
-            <p:tab title="#{forms['maps.circle']}}">
+            <p:tab title="#{forms['maps.circle']}">
 
             </p:tab>
             <p:tab title="Tab 2">
@@ -20,6 +20,9 @@
 
             </p:tab>
         </p:tabView>
+
+        <!-- TODO: dodac do przycisku aktualizujacego wartosc update=id. Pozwoli to na aktualizacje mapy w odpowiedni sposob. -->
+
         <h:form id="map-form">
             <m:map width="600px" height="600px" zoom="10">
                 <m:circle />

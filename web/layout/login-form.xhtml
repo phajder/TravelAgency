@@ -12,11 +12,11 @@
             <p:tabView style="display: block;  background: lavender; width: inherit">
             <p:tab title="#{menu['menu.login']}" titleStyle="width: 100%;">
             <h:panelGrid columns="2" cellpadding="10">
-                        <p:outputLabel id="label-username" value="#{forms['login.username']}"/>
-                        <p:inputText id="input-username" value="#{userBean.username}" required="true"/>
-                        <p:outputLabel id="label-password" value="#{forms['login.password']}"/>
-                        <p:password id="input-password" value="#{userBean.password}" required="true"/>
-                        <ui:insert name="login-button"/>
+                <p:outputLabel id="label-username" value="#{forms['login.username']}"/>
+                <p:inputText id="input-username" value="#{userBean.username}" required="true"/>
+                <p:outputLabel id="label-password" value="#{forms['login.password']}"/>
+                <p:password id="input-password" value="#{userBean.password}" required="true"/>
+                <ui:insert name="login-button"/>
             </h:panelGrid>
             </p:tab>
             </p:tabView>

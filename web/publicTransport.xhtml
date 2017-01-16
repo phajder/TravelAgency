@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      template="/layout/layout.xhtml">
+    <ui:define name="content">
+        <h:form id="find-connection-form">
+            <h:panelGrid columns="2">
+                <p:outputLabel value="#{forms['public_transport.location']}" />
+                <p:selectOneListbox id="location" value="#{publicTransport.location}">
+                    <f:selectItem itemLabel="#{forms['public_transport.select']}" itemValue="" noSelectionOption="true" />
+                    <f:selectItems value="#{publicTransport.locations.keySet}" />
+                </p:selectOneListbox>
+
+                <p:outputLabel value="#{forms['public_transport.start']}" />
+                <p:inputText value="#{publicTransport.startPoint}" />
+
+                <p:outputLabel value="#{forms['public_transport.end']}" />
+                <p:inputText value="#{publicTransport.endPoint}" />
+
+                <!-- TODO: dodatkowe pola do API jakdojade.pl -->
+            </h:panelGrid>
+            <p:commandButton action="#{publicTransport.findConnection}" value="#{forms['submit']}" />
+        </h:form>
+    </ui:define>
+</ui:composition>
