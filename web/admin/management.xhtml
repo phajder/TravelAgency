@@ -10,14 +10,17 @@
     <ui:define name="content">
         <!-- DODAC JAKIS NAGLOWEK! Moze w formie grid panelu calosc. -->
         <h:form id="add-location-form">
-            <h:panelGrid columns="2" cellpadding="10">
-                <p:outputLabel value="#{forms['admin.api.location']}" />
-                <p:inputText value="#{adminManagement.location}" />
+            <p:panel header="#{forms['admin.header.location']}">
+                <h:panelGrid columns="2" cellpadding="10">
+                    <p:outputLabel value="#{forms['admin.api.location']}" />
+                    <p:inputText value="#{adminManagement.location}" />
 
-                <p:outputLabel value="#{forms['admin.api.cid']}" />
-                <p:inputText value="#{adminManagement.cid}" />
-            </h:panelGrid>
-            <p:commandButton action="#{adminManagement.addLocation()}" value="#{forms['submit']}" />
+                    <p:outputLabel value="#{forms['admin.api.cid']}" />
+                    <p:inputText value="#{adminManagement.cid}" />
+                </h:panelGrid>
+                <p:separator />
+                <p:commandButton action="#{adminManagement.addLocation()}" value="#{forms['submit']}" />
+            </p:panel>
         </h:form>
     </ui:define>
 </ui:composition>
