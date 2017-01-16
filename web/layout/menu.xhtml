@@ -26,6 +26,7 @@
             <p:submenu label="#{menu['main.user']}" >
                 <p:menuitem value="#{menu['menu.register']}" url="/register.xhtml" rendered="#{!userBean.userLogged}" />
                 <p:menuitem value="#{menu['menu.login']}" url="/user-login.xhtml" rendered="#{!userBean.userLogged}" />
+                <p:menuitem value="#{menu['menu.favourite']}" url="/favourite.xhtml" rendered="#{!userBean.userLogged}" />
                 <p:menuitem value="#{menu['menu.profile']}" url="/user/profile.xhtml" />
                 <p:menuitem value="#{menu['menu.logout']}" url="#{userBean.logout}" rendered="#{userBean.userLogged}" />
             </p:submenu>

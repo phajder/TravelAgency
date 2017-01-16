@@ -30,8 +30,8 @@ public class ApiLocationsDAO extends DAO {
         } catch (SQLException e) {
             //TODO: tomcat logging exception
         } finally {
-            try { if(conn != null) conn.close(); } catch (SQLException ignored){}
             try { if(stmt != null) stmt.close(); } catch (SQLException ignored){}
+            try { if(conn != null) conn.close(); } catch (SQLException ignored){}
         }
         return false;
     }
@@ -52,9 +52,9 @@ public class ApiLocationsDAO extends DAO {
         } catch (SQLException e) {
             //TODO: tomcat logging exception
         } finally {
-            try { if(conn != null) conn.close(); } catch (SQLException ignored){}
-            try { if(stmt != null) stmt.close(); } catch (SQLException ignored){}
             try { if(rs != null) rs.close(); } catch (SQLException ignored){}
+            try { if(stmt != null) stmt.close(); } catch (SQLException ignored){}
+            try { if(conn != null) conn.close(); } catch (SQLException ignored){}
         }
         return result;
     }

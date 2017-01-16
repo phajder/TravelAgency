@@ -27,6 +27,10 @@ public class UserDAO extends DAO {
     private static final String SQL_REGISTER =
             "INSERT INTO users (username, password, salt, user_role, email) " +
             " VALUES (?,?,?,?,?)";
+    private static final String SQL_GET_USER_ID =
+            "SELECT user_id " +
+            " FROM users " +
+            " WHERE username=?";
 
     public String getSalt(String username) {
         Connection conn = null;
@@ -43,9 +47,9 @@ public class UserDAO extends DAO {
         } catch (SQLException e) {
             //TODO: tomcat logging exception
         } finally {
-            try { if(conn != null) conn.close(); } catch (SQLException ignored){}
-            try { if(stmt != null) stmt.close(); } catch (SQLException ignored){}
             try { if(rs != null) rs.close(); } catch (SQLException ignored){}
+            try { if(stmt != null) stmt.close(); } catch (SQLException ignored){}
+            try { if(conn != null) conn.close(); } catch (SQLException ignored){}
         }
         return null;
     }
@@ -68,11 +72,34 @@ public class UserDAO extends DAO {
         } catch (SQLException e) {
             //TODO: tomcat logging exception
         } finally {
-            try { if(conn != null) conn.close(); } catch (SQLException ignored){}
-            try { if(stmt != null) stmt.close(); } catch (SQLException ignored){}
             try { if(rs != null) rs.close(); } catch (SQLException ignored){}
+            try { if(stmt != null) stmt.close(); } catch (SQLException ignored){}
+            try { if(conn != null) conn.close(); } catch (SQLException ignored){}
         }
         return user;
+    }
+
+    public long getUserId(String username) {
+        long userId = -1L;
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            conn = daoFactory.getConnection();
+            stmt = conn.prepareStatement(SQL_GET_USER_ID);
+            setValues(stmt, username);
+            rs = stmt.executeQuery();
+            if(rs.next()) {
+                userId = rs.getLong(1);
+            }
+        } catch (SQLException e) {
+            //TODO: tomcat logging exception
+        } finally {
+            try { if(rs != null) rs.close(); } catch (SQLException ignored){}
+            try { if(stmt != null) stmt.close(); } catch (SQLException ignored){}
+            try { if(conn != null) conn.close(); } catch (SQLException ignored){}
+        }
+        return userId;
     }
 
     public boolean isUsernameUnique(String username) {
@@ -91,9 +118,9 @@ public class UserDAO extends DAO {
         } catch (SQLException e) {
             //TODO: tomcat logging exception
         } finally {
-            try { if(conn != null) conn.close(); } catch (SQLException ignored){}
-            try { if(stmt != null) stmt.close(); } catch (SQLException ignored){}
             try { if(rs != null) rs.close(); } catch (SQLException ignored){}
+            try { if(stmt != null) stmt.close(); } catch (SQLException ignored){}
+            try { if(conn != null) conn.close(); } catch (SQLException ignored){}
         }
         return false;
     }
@@ -115,8 +142,8 @@ public class UserDAO extends DAO {
         } catch (SQLException e) {
             //TODO: tomcat logging exception
         } finally {
-            try { if(conn != null) conn.close(); } catch (SQLException ignored){}
             try { if(stmt != null) stmt.close(); } catch (SQLException ignored){}
+            try { if(conn != null) conn.close(); } catch (SQLException ignored){}
         }
         return false;
     }
