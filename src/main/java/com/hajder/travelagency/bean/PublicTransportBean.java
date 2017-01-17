@@ -1,9 +1,11 @@
 package com.hajder.travelagency.bean;
 
+import com.google.maps.model.LatLng;
 import com.hajder.travelagency.action.ApiLocationAction;
 import com.hajder.travelagency.action.FavouriteTransportAction;
 import com.hajder.travelagency.entity.FavouritePublicTransport;
 import com.hajder.travelagency.entity.User;
+import com.hajder.travelagency.model.Localizator;
 import org.apache.http.client.utils.URIBuilder;
 
 import javax.annotation.PostConstruct;
@@ -13,7 +15,6 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -41,27 +42,39 @@ public class PublicTransportBean {
         cities = new ArrayList<>(locations.keySet());
     }
 
-    public String findConnection() {
-        try {
+    public void findConnection() throws Exception {
+        LatLng startCoord = Localizator.getCoordinates(location + ", " + startPoint),
+                endCoord = Localizator.getCoordinates(location + ", " + endPoint);
+        if(startCoord != null && endCoord != null) {
             URI uri = new URIBuilder()
                     .setScheme("http")
                     .setHost("jakdojade.pl")
                     .setPath("/")
-                    //.setParameter("fc", "52.23232:21.01599")
-                    //.setParameter("tc", "52.26289:20.98983")
-                    .setParameter("fn", startPoint)
-                    .setParameter("tn", endPoint)
+                    .setParameter("fc", startCoord.lat + ":" + startCoord.lng)
+                    .setParameter("tc", endCoord.lat + ":" + endCoord.lng)
                     .setParameter("cid", locations.get(location))
-                    .setParameter("d", date.toString())
+                    .setParameter("d", date != null ? date.toString() : null)
                     .setParameter("h", hour)
                     .setParameter("aac", Boolean.toString(avoidTransfer))
                     .setParameter("ia", Boolean.toString(mode))
+                    .setParameter("as", Boolean.toString(true))
                     .build();
-            return uri.toString();
-        } catch (URISyntaxException e) {
-            //TODO: tomcat logging exception
+            FacesContext.getCurrentInstance().getExternalContext().redirect(uri.toString());
+        } else {
+            //TODO: lokalizacja wiadomosci
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Uwaga!", "Doprecyzuj adresy."));
         }
-        return null;
+    }
+
+    public void findConnection(FavouritePublicTransport fpt) throws Exception {
+        location = fpt.getLocation();
+        startPoint = fpt.getStartPoint();
+        endPoint = fpt.getEndPoint();
+        hour = fpt.getHour();
+        avoidTransfer = fpt.isAvoidTransfer();
+        mode = fpt.isMode();
+        findConnection();
     }
 
     public void addFavourite() {
@@ -73,6 +86,7 @@ public class PublicTransportBean {
         FacesMessage msg;
         if(user != null) {
             FavouritePublicTransport fpt = new FavouritePublicTransport();
+            fpt.setCid(locations.get(location));
             fpt.setStartPoint(startPoint);
             fpt.setEndPoint(endPoint);
             fpt.setHour(hour);

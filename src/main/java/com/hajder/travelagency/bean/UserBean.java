@@ -1,5 +1,6 @@
 package com.hajder.travelagency.bean;
 
+import com.hajder.travelagency.action.ChangePasswordAction;
 import com.hajder.travelagency.action.GetUserAction;
 import com.hajder.travelagency.action.RegisterUserAction;
 import com.hajder.travelagency.entity.User;
@@ -23,6 +24,7 @@ import java.net.URISyntaxException;
 @RequestScoped
 public class UserBean {
     private String username;
+    private String oldPassword;
     private String password;
     private String email;
 
@@ -54,23 +56,6 @@ public class UserBean {
         return NavigationTags.SUCCESS;
     }
 
-    public String dupa() {
-        try {
-            URI uri = new URIBuilder()
-                    .setScheme("http")
-                    .setHost("jakdojade.pl")
-                    .setPath("/")
-                    .setParameter("fc", "52.23232:21.01599")
-                    .setParameter("tc", "52.26289:20.98983")
-                    .setParameter("cid", "3000")
-                    .build();
-            return uri.toString();
-        } catch (URISyntaxException e) {
-
-        }
-        return null;
-    }
-
     public String register() {
         //TODO: Wykonac wiadomosc jako lokalizowana
         RegisterUserAction action = new RegisterUserAction();
@@ -82,6 +67,32 @@ public class UserBean {
         FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage("Wykonano poprawnie rejestracje. Musisz sie zalogowac."));
         return NavigationTags.SUCCESS;
+    }
+
+    public void changePassword() {
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
+                .getExternalContext().getSession(true);
+        User user = (User) session.getAttribute("user");
+
+        FacesMessage msg;
+
+        if(user != null) {
+            ChangePasswordAction action = new ChangePasswordAction();
+            action.setUsername(user.getUsername());
+            action.setOldPassword(oldPassword);
+            action.setNewPassword(password);
+            action.execute();
+
+            if (action.isResult()) {
+                msg = new FacesMessage("Success!");
+            } else {
+                msg = new FacesMessage("Invalid passwords");
+            }
+        } else {
+            msg = new FacesMessage("You have to be logged in!");
+        }
+
+        FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
     public boolean isAdminLogged() {
@@ -127,5 +138,13 @@ public class UserBean {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setOldPassword(String oldPassword) {
+        this.oldPassword = oldPassword;
+    }
+
+    public String getOldPassword() {
+        return oldPassword;
     }
 }

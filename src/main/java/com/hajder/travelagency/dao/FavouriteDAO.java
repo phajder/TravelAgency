@@ -17,11 +17,13 @@ import static com.hajder.travelagency.dao.DAOUtil.setValues;
  */
 public class FavouriteDAO extends DAO {
     private static final String SQL_ADD_FAVOURITE_TRANSPORT =
-            "INSERT INTO favourite_transport (user_id, start_point, end_point, fav_time, avoid, point_mode) " +
-            " VALUES (?,?,?,?,?,?)";
+            "INSERT INTO favourite_transport (user_id, location_id, start_point, end_point, fav_time, avoid, point_mode) " +
+            " VALUES (?,(SELECT location_id FROM api_locations WHERE cid=?),?,?,?,?)";
     private static final String SQL_GET_FAVOURITES =
-            "SELECT favourite_id, start_point, end_point, fav_time, avoid, point_mode " +
-            " FROM favourite_transport " +
+            "SELECT ft.favourite_id, al.cid, al.location, ft.start_point, " +
+                  " ft.end_point, ft.fav_time, ft.avoid, ft.point_mode " +
+            " FROM favourite_transport ft " +
+            " LEFT JOIN api_locations al ON al.location_id=ft.location_id" +
             " WHERE user_id = ?";
 
     public boolean saveFavourite(FavouritePublicTransport fpt, long userId){
@@ -30,7 +32,7 @@ public class FavouriteDAO extends DAO {
         try {
             conn = daoFactory.getConnection();
             stmt = conn.prepareStatement(SQL_ADD_FAVOURITE_TRANSPORT);
-            setValues(stmt, userId,
+            setValues(stmt, userId, fpt.getCid(),
                     fpt.getStartPoint(), fpt.getEndPoint(),
                     fpt.getHour(),
                     fpt.isAvoidTransfer(), fpt.isMode());
@@ -61,11 +63,13 @@ public class FavouriteDAO extends DAO {
                 counter = 1;
                 FavouritePublicTransport obj = new FavouritePublicTransport();
                 obj.setFavouriteId(rs.getLong(counter++));
+                obj.setCid(rs.getString(counter++));
+                obj.setLocation(rs.getString(counter++));
                 obj.setStartPoint(rs.getString(counter++));
                 obj.setEndPoint(rs.getString(counter++));
                 obj.setHour(rs.getString(counter++));
                 obj.setAvoidTransfer(rs.getBoolean(counter++));
-                obj.setMode(rs.getBoolean(counter++));
+                obj.setMode(rs.getBoolean(counter));
                 result.add(obj);
             }
         } catch (SQLException e) {

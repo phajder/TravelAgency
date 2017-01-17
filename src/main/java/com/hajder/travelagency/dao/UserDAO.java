@@ -21,7 +21,8 @@ public class UserDAO extends DAO {
             "SELECT salt " +
             " FROM users " +
             " WHERE username = ?";
-    private static final String SQL_USER_UNIQUE = "SELECT COUNT(username) " +
+    private static final String SQL_USER_UNIQUE =
+            "SELECT COUNT(username) " +
             " FROM users " +
             " WHERE username = ?";
     private static final String SQL_REGISTER =
@@ -31,6 +32,9 @@ public class UserDAO extends DAO {
             "SELECT user_id " +
             " FROM users " +
             " WHERE username=?";
+    private static final String SQL_CHANGE_PASSWORD = "UPDATE users " +
+            " SET password = ? " +
+            " WHERE username = ? ";
 
     public String getSalt(String username) {
         Connection conn = null;
@@ -100,6 +104,25 @@ public class UserDAO extends DAO {
             try { if(conn != null) conn.close(); } catch (SQLException ignored){}
         }
         return userId;
+    }
+
+    public boolean changePassword(String username, String newPassword) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        try {
+            conn = daoFactory.getConnection();
+            stmt = conn.prepareStatement(SQL_CHANGE_PASSWORD);
+            setValues(stmt, newPassword, username);
+
+            return stmt.executeUpdate() == 1;
+        } catch (SQLException e) {
+            //TODO: tomcat logging exception
+            System.out.println("dupadupa");
+        } finally {
+            try { if(stmt != null) stmt.close(); } catch (SQLException ignored){}
+            try { if(conn != null) conn.close(); } catch (SQLException ignored){}
+        }
+        return false;
     }
 
     public boolean isUsernameUnique(String username) {

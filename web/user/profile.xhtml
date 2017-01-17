@@ -8,6 +8,31 @@
       xmlns:p="http://primefaces.org/ui"
       template="/layout/layout.xhtml">
     <ui:define name="content">
-        <p>Hi user profile.</p>
+        <h:form id="change-locale-form">
+            <p:panel header="Locale">
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="#{forms['locale.set']}" />
+                    <p:selectOneMenu value="#{localeBean.language}" onchange="submit()">
+                        <f:selectItems value="#{localeBean.localesInMap}" />
+                    </p:selectOneMenu>
+                </p:panelGrid>
+            </p:panel>
+        </h:form>
+        <h:form id="change-password-form">
+            <p:panel header="#{forms['changePassword']}">
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="#{forms['oldPassword']}" />
+                    <p:password value="#{userBean.oldPassword}" />
+
+                    <p:outputLabel value="#{forms['newPassword']}" />
+                    <p:password match="pwd2" value="#{userBean.password}" />
+
+                    <p:outputLabel value="#{forms['confirmPassword']}" />
+                    <p:password id="pwd2" value="#{userBean.password}" />
+                </p:panelGrid>
+                <p:separator />
+                <p:commandButton value="#{forms['submit']}" action="#{userBean.changePassword}" />
+            </p:panel>
+        </h:form>
     </ui:define>
 </ui:composition>

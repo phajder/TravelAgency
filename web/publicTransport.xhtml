@@ -43,7 +43,7 @@
                 </p:panelGrid>
                 <p:separator />
                 <h:panelGrid columns="2">
-                    <p:button href="#{publicTransport.findConnection()}" value="#{forms['find']}" target="_blank" />
+                    <h:commandLink target="_blank" action="#{publicTransport.findConnection}" value="#{forms['find']}" />
                     <p:commandButton update="msg" action="#{publicTransport.addFavourite}"
                                      value="#{forms['public_transport.favourite']}" />
                 </h:panelGrid>

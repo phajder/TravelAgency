@@ -21,6 +21,10 @@
 
                 <p:column selectionMode="single" />
 
+                <p:column headerText="#{forms['public_transport.location']}">
+                    <h:outputText value="#{fav.location}" />
+                </p:column>
+
                 <p:column headerText="#{forms['public_transport.start']}">
                     <h:outputText value="#{fav.startPoint}" />
                 </p:column>
@@ -45,7 +49,8 @@
                     <p:commandButton process="favDT" value="#{forms['modify']}"
                                      update=":fav-form:favDetails" oncomplete="PF('favDialog').show()" />
                     <p:commandButton process="favDT" value="#{forms['delete']}" action="#"/>
-                    <p:commandButton value="#{forms['find']}" action="#" />
+                    <h:commandLink target="_blank" value="#{forms['find']}"
+                                   action="#{publicTransport.findConnection(favouriteTransport.favouriteSelected)}" />
                 </f:facet>
             </p:dataTable>
             <p:dialog header="Info" widgetVar="favDialog" appendTo="@(body)" modal="true"

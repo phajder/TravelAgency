@@ -10,9 +10,12 @@
     <ui:define name="content">
         <p>Hi, it's admin restricted content.</p>
         <h:form id="set-locale">
-            <h:selectOneMenu value="#{localeBean.language}" onchange="submit()">
-                <f:selectItems value="#{localeBean.localesInMap}"/>
-            </h:selectOneMenu>
+            <p:panel header="Locale">
+                <p:outputLabel value="#{forms['locale.set']}" />
+                <p:selectOneMenu value="#{localeBean.language}" onchange="submit()">
+                    <f:selectItems value="#{localeBean.localesInMap}"/>
+                </p:selectOneMenu>
+            </p:panel>
         </h:form>
     </ui:define>
 </ui:composition>

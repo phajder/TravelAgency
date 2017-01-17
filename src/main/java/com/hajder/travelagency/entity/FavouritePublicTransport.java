@@ -6,7 +6,7 @@ package com.hajder.travelagency.entity;
  */
 public class FavouritePublicTransport {
     private long favouriteId;
-    private String startPoint, endPoint, hour;
+    private String startPoint, endPoint, hour, cid, location;
     private boolean avoidTransfer, mode;
 
     public FavouritePublicTransport(){
@@ -59,5 +59,21 @@ public class FavouritePublicTransport {
 
     public void setFavouriteId(long favouriteId) {
         this.favouriteId = favouriteId;
+    }
+
+    public String getCid() {
+        return cid;
+    }
+
+    public void setCid(String cid) {
+        this.cid = cid;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }
