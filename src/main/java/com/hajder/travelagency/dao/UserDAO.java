@@ -117,7 +117,6 @@ public class UserDAO extends DAO {
             return stmt.executeUpdate() == 1;
         } catch (SQLException e) {
             //TODO: tomcat logging exception
-            System.out.println("dupadupa");
         } finally {
             try { if(stmt != null) stmt.close(); } catch (SQLException ignored){}
             try { if(conn != null) conn.close(); } catch (SQLException ignored){}
